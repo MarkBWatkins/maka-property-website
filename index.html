@@ -174,6 +174,19 @@
   .welcome p{color:rgba(255,255,255,.94);max-width:780px}
   @media(max-width:860px){.welcome .wrap{flex-direction:column;text-align:center}}
 
+  /* Rates */
+  .rates{background:var(--stone)}
+  .rates .sec-head{text-align:center;max-width:600px;margin:0 auto 38px}
+  .rates .sec-head .rule{margin-inline:auto}
+  .rate-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:800px;margin:0 auto}
+  .rate-card{background:var(--white);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:10px;padding:32px 28px;text-align:center}
+  .rate-tag{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:12px}
+  .rate-price{font-family:'Montserrat',sans-serif;font-weight:700;font-size:2.7rem;color:var(--ink);line-height:1;margin-bottom:14px}
+  .rate-price span{font-size:1rem;font-weight:500;color:var(--muted)}
+  .rate-card p{color:var(--ink-soft);font-size:.95rem;margin:0}
+  .rate-note{text-align:center;color:var(--ink-soft);font-size:.9rem;margin-top:24px}
+  @media(max-width:860px){.rate-grid{grid-template-columns:1fr}}
+
   /* Locations */
   .coverage{background:var(--white);border-top:1px solid var(--line)}
   .coverage .wrap{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
@@ -236,6 +249,7 @@
       <li><a href="#homes">Our Homes</a></li>
       <li><a href="#why">Why Book With Us</a></li>
       <li><a href="#coverage">Locations</a></li>
+      <li><a href="#rates">Rates</a></li>
       <li><a href="#enquire" class="navcta">Enquire</a></li>
     </ul>
   </div>
@@ -434,6 +448,29 @@
       <p class="big">Two of the North Island's best holiday corners — the rolling Waikato countryside near Tīrau and Hobbiton, and the quiet Bay of Plenty coast at Ohiwa.</p>
       <p>Both within easy reach of Hamilton, Tauranga and Rotorua, and both perfect for a big group getaway — a family reunion, a milestone birthday, or just the whole crew away together.</p>
     </div>
+  </div>
+</section>
+
+<section class="rates" id="rates">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rule"></div>
+      <h2>Rates</h2>
+      <p>Straightforward pricing, the same for both homes — and booked direct, so there are no platform fees on top.</p>
+    </div>
+    <div class="rate-grid">
+      <div class="rate-card">
+        <div class="rate-tag">2 nights or more</div>
+        <div class="rate-price">$400<span>/night</span></div>
+        <p>Covers up to <strong>4 guests</strong>. Additional guests are <strong>$50</strong> per person, per night.</p>
+      </div>
+      <div class="rate-card">
+        <div class="rate-tag">Single-night stays</div>
+        <div class="rate-price">$600<span>/night</span></div>
+        <p>Covers up to <strong>6 guests</strong>. Additional guests are <strong>$50</strong> per person.</p>
+      </div>
+    </div>
+    <p class="rate-note">All prices in NZD. Send us your dates and group size and we'll confirm an exact quote.</p>
   </div>
 </section>
 
