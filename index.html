@@ -185,6 +185,10 @@
   .rate-price span{font-size:1rem;font-weight:500;color:var(--muted)}
   .rate-card p{color:var(--ink-soft);font-size:.95rem;margin:0}
   .rate-note{text-align:center;color:var(--ink-soft);font-size:.9rem;margin-top:24px}
+  .rate-home{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.25rem;text-align:center;color:var(--ink);margin:0 auto 6px}
+  .rate-home-sub{text-align:center;color:var(--ink-soft);font-size:.92rem;margin:0 auto 20px}
+  .rate-block+.rate-block{margin-top:44px}
+  .rate-grid-single{grid-template-columns:1fr;max-width:389px}
   @media(max-width:860px){.rate-grid{grid-template-columns:1fr}}
 
   /* Locations */
@@ -319,7 +323,7 @@
     <div class="home">
       <div class="home-img">
         <span class="badge">★ Guest favourite · On Airbnb</span>
-        <img class="home-photo" src="img/living.jpg" alt="Open-plan living area with large windows framing the rural view — The Home on the Hill">
+        <img class="home-photo" src="img/liveview.jpg" alt="Living area opening to the deck with sweeping countryside views — The Home on the Hill">
       </div>
       <div class="home-body">
         <div class="loc">
@@ -392,11 +396,12 @@
       <figure class="wide"><img src="img/pano.jpg" alt="Panoramic countryside views across the farm"></figure>
       <figure><img src="img/cinema.jpg" alt="Cinema lounge with projector screen and sofas"></figure>
       <figure><img src="img/living2.jpg" alt="Open-plan living and kitchen area"></figure>
-      <figure class="wide"><img src="img/hpatio.jpg" alt="Outdoor dining and lounge on the patio with rural views"></figure>
-      <figure class="wide"><img src="img/hlounge.jpg" alt="Outdoor corner lounge suite on the patio"></figure>
+      <figure class="wide"><img src="img/patio2.jpg" alt="Outdoor dining on the patio with sweeping countryside views"></figure>
       <figure><img src="img/dining.jpg" alt="Dining area"></figure>
       <figure><img src="img/bed1.jpg" alt="One of six bedrooms"></figure>
+      <figure><img src="img/bed2.jpg" alt="A double bedroom"></figure>
       <figure><img src="img/bed3.jpg" alt="A queen bedroom"></figure>
+      <figure><img src="img/bed5.jpg" alt="A twin bedroom"></figure>
       <figure><img src="img/bath1.jpg" alt="One of three bathrooms"></figure>
     </div>
   </div>
@@ -476,19 +481,35 @@
     <div class="sec-head">
       <div class="rule"></div>
       <h2>Rates</h2>
-      <p>Straightforward pricing, the same for both homes — and booked direct, so there are no platform fees on top.</p>
+      <p>Straightforward pricing for each home — and booked direct, so there are no platform fees on top.</p>
     </div>
+    <div class="rate-block">
+    <h3 class="rate-home">The Home on the Hill</h3>
+    <p class="rate-home-sub">Piarere · Tīrau · up to 12 guests</p>
+    <div class="rate-grid rate-grid-single">
+      <div class="rate-card">
+        <div class="rate-tag">All year</div>
+        <div class="rate-price">$800<span>/night</span></div>
+        <p>Covers up to <strong>12 guests</strong>.</p>
+      </div>
+    </div>
+    </div>
+
+    <div class="rate-block">
+    <h3 class="rate-home">2 Wagner Place, Ohiwa</h3>
+    <p class="rate-home-sub">Minimum 2-night stay · up to 14 guests</p>
     <div class="rate-grid">
       <div class="rate-card">
-        <div class="rate-tag">2 nights or more</div>
-        <div class="rate-price">$400<span>/night</span></div>
-        <p>Covers up to <strong>4 guests</strong>. Additional guests are <strong>$50</strong> per person, per night.</p>
+        <div class="rate-tag">Summer · November – April</div>
+        <div class="rate-price">$1,200<span>/night</span></div>
+        <p>Covers up to <strong>14 guests</strong>. Minimum <strong>2-night</strong> stay.</p>
       </div>
       <div class="rate-card">
-        <div class="rate-tag">Single-night stays</div>
-        <div class="rate-price">$600<span>/night</span></div>
-        <p>Covers up to <strong>6 guests</strong>. Additional guests are <strong>$50</strong> per person.</p>
+        <div class="rate-tag">Winter · May – October</div>
+        <div class="rate-price">$800<span>/night</span></div>
+        <p>Covers up to <strong>14 guests</strong>. Minimum <strong>2-night</strong> stay.</p>
       </div>
+    </div>
     </div>
     <p class="rate-note">All prices in NZD. Send us your dates and group size and we'll confirm an exact quote.</p>
   </div>
