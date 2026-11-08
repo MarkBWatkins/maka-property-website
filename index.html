@@ -210,6 +210,14 @@
   input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
   select option{color:#1e1c1a}
   textarea{resize:vertical;min-height:84px}
+  .quote{margin:4px 0 16px;padding:16px 18px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#fff}
+  .quote[hidden]{display:none}
+  .quote .q-row{display:flex;justify-content:space-between;gap:12px;font-size:.92rem;color:#d5cfc5;padding:3px 0}
+  .quote .q-total{display:flex;justify-content:space-between;gap:12px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.15rem;border-top:1px solid rgba(255,255,255,.14);margin-top:8px;padding-top:10px}
+  .quote .q-home{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:10px 0 4px}
+  .quote .q-home:first-child{margin-top:0}
+  .quote .q-warn{font-size:.88rem;color:#f2c6a8;margin-top:8px}
+  .quote .q-note{font-size:.8rem;color:#a9a297;margin-top:8px}
   .eform .btn-primary{width:100%;justify-content:center;margin-top:6px;padding:13px;font-size:1rem}
   .enquire .email{display:inline-block;margin-top:24px;color:#fff;text-decoration:none;font-weight:600;border-bottom:2px solid var(--accent);padding-bottom:2px;font-family:'Montserrat',sans-serif}
 
@@ -542,6 +550,8 @@
         <div class="field"><label for="occasion">Occasion (optional)</label><input id="occasion" name="occasion" placeholder="Family reunion, birthday…"></div>
       </div>
       <div class="field"><label for="message">Anything else?</label><textarea id="message" name="message" placeholder="Questions, flexible dates, anything we should know…"></textarea></div>
+      <div class="quote" id="quote" hidden aria-live="polite"></div>
+      <input type="hidden" name="estimate" id="estimate">
       <button type="submit" class="btn btn-primary">Send enquiry →</button>
     </form>
     <a class="email" href="mailto:katew@makaproperty.co.nz">katew@makaproperty.co.nz</a>
@@ -595,6 +605,40 @@
     lb.addEventListener('click', closeLb);
     var cb=lb.querySelector('.lb-close'); if(cb) cb.addEventListener('click', function(e){ e.stopPropagation(); closeLb(); });
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
+  })();
+</script>
+<script>
+  // Live rate estimate on the enquiry form
+  (function(){
+    var RATES={
+      hill:{name:'The Home on the Hill',max:12,minNights:1,rate:function(d){return 800;}},
+      ohiwa:{name:'2 Wagner Place, Ohiwa',max:14,minNights:2,rate:function(d){var m=d.getMonth();return (m>=10||m<=3)?1200:800;}}
+    };
+    var f=document.querySelector('form.eform'); if(!f) return;
+    var home=f.querySelector('#home'),ci=f.querySelector('#checkin'),co=f.querySelector('#checkout'),g=f.querySelector('#guests'),box=f.querySelector('#quote'),est=f.querySelector('#estimate');
+    function money(n){return '$'+n.toLocaleString('en-NZ');}
+    function parse(v){if(!v)return null;var p=v.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}
+    function calc(key,a,b,guests){
+      var h=RATES[key],nights=0,total=0,bands={};
+      for(var d=new Date(a);d<b;d.setDate(d.getDate()+1)){var r=h.rate(d);nights++;total+=r;bands[r]=(bands[r]||0)+1;}
+      var rows=Object.keys(bands).sort(function(x,y){return y-x;}).map(function(r){return '<div class="q-row"><span>'+bands[r]+' night'+(bands[r]>1?'s':'')+' × '+money(+r)+'</span><span>'+money(r*bands[r])+'</span></div>';}).join('');
+      var warn='';
+      if(nights<h.minNights) warn+='<div class="q-warn">Minimum stay is '+h.minNights+' nights.</div>';
+      if(guests>h.max) warn+='<div class="q-warn">This home takes up to '+h.max+' guests.</div>';
+      return {html:rows+'<div class="q-total"><span>Estimated total</span><span>'+money(total)+'</span></div>'+warn,text:h.name+': '+nights+' nights, '+money(total),total:total};
+    }
+    function update(){
+      if(ci.value) co.min=ci.value;
+      var a=parse(ci.value),b=parse(co.value),guests=+g.value||0;
+      if(!a||!b||b<=a){box.hidden=true;est.value='';return;}
+      var v=home.value,keys=/Ohiwa/.test(v)?['ohiwa']:/Hill/.test(v)?['hill']:['hill','ohiwa'];
+      var html='',txt=[];
+      keys.forEach(function(k){var r=calc(k,a,b,guests);if(keys.length>1)html+='<div class="q-home">'+RATES[k].name+'</div>';html+=r.html;txt.push(r.text);});
+      box.innerHTML=html+'<div class="q-note">NZD estimate, booked direct. We\'ll confirm availability and your exact rate.</div>';
+      box.hidden=false; est.value=txt.join(' | ');
+    }
+    [home,ci,co,g].forEach(function(el){el.addEventListener('input',update);el.addEventListener('change',update);});
+    update();
   })();
 </script>
 </body>
